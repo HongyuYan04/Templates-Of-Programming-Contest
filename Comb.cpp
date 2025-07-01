@@ -43,36 +43,3 @@ struct Comb {
         return fac(n) * invfac(m) * invfac(n - m);
     }
 } comb;
-
-constexpr int MAXN = 1E6;
-struct Comb {
-    Z fac[MAXN + 1], invfac[MAXN + 1];
-
-    Comb() {
-        fac[0] = 1;
-        for (int i = 1; i <= MAXN; i++) {
-            fac[i] = fac[i - 1] * i;
-        }
-        invfac[MAXN] = fac[MAXN].inv();
-        for (int i = MAXN - 1; i >= 0; i--) {
-            invfac[i] = invfac[i + 1] * (i + 1);
-        }
-    }
-    
-    /* 
-    Z binom(int n, int m) {
-        Z ans = 1;
-        for (int i = n - m + 1; i <= n; i++) {
-            ans *= i;
-        }
-        return ans * invfac[m];
-    }
-    */
-
-	Z binom(int n, int m) {
-		if (n < m || m < 0) {
-			return 0;
-		}
-		return fac[n] * invfac[m] * invfac[n - m];
-	}
-} comb;
